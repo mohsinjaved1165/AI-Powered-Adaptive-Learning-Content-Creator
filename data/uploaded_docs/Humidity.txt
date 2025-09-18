@@ -1,0 +1,1 @@
+Humidity is the amount of water vapor present in the air. It’s usually expressed as a percentage (%), which indicates how much moisture the air contains compared to the maximum it could hold at a given temperature.

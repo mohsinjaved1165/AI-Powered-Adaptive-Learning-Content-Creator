@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Learning Content Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], select, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input[type="submit"] {
+            background-color: #0056b3;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #003f7f;
+        }
+        .flash {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .flash-success {
+            background: #e6ffed;
+            border-left: 6px solid #28a745;
+            color: #155724;
+        }
+        .flash-error {
+            background: #ffe6e6;
+            border-left: 6px solid #dc3545;
+            color: #721c24;
+        }
+        .answer-box {
+            background: #eef6ff;
+            border-left: 6px solid #0056b3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Adaptive Learning Content Creator</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, msg in messages %}
+    <div class="flash flash-{{ category }}">
+        {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- File Upload Form -->
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <label for="file">Upload Knowledge File (.txt):</label>
+        <input type="file" id="file" name="file" accept=".txt" required>
+        <input type="submit" value="Upload & Update Dataset">
+    </form>
+
+    <hr>
+
+    <!-- Question Form -->
+    <form method="post" action="/">
+        <label for="query">Enter topic/question:</label>
+        <input type="text" id="query" name="query" placeholder="e.g., What is machine learning?" required>
+
+        <label for="difficulty">Select Difficulty:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <label for="learning_style">Select Learning Style:</label>
+        <select name="learning_style" id="learning_style">
+            <option value="visual">Visual</option>
+            <option value="auditory">Auditory</option>
+            <option value="reading" selected>Reading</option>
+        </select>
+
+        <input type="submit" value="Generate">
+    </form>
+
+    {% if answer %}
+    <div class="answer-box">
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

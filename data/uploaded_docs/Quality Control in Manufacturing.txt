@@ -1,0 +1,1 @@
+Use machine learning to detect defective products and ensure manufacturing quality. The model can predict whether a product is defective or not based on sensor readings, measurements, or images.
